@@ -1,6 +1,6 @@
 # winui
 
-A new Flutter project.
+A simple dashboard.
 
 ## Getting Started
 
