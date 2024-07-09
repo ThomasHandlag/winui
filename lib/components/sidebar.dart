@@ -17,6 +17,26 @@ class SidebarState extends State<Sidebar> {
 
   final Duration animationDuration = const Duration(milliseconds: 500);
 
+  int _index = 0;
+
+  final List<Map<String, IconData>> sidebarItems = [
+    {
+      "Home": Icons.home,
+    },
+    {
+      "Tasks": Icons.schedule,
+    },
+    {
+      "News": Icons.newspaper,
+    },
+    {
+      "Support": Icons.support,
+    },
+    {
+      "About": Icons.info,
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -71,41 +91,24 @@ class SidebarState extends State<Sidebar> {
                   ),
                   const Divider(),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SidebarButton(
-                            isSelected: true,
-                            icon: Icons.home,
-                            label: "Dashboard",
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return SidebarButton(
+                            isSelected: index == _index,
+                            icon: sidebarItems[index].values.first,
+                            label: sidebarItems[index].keys.first,
                             isAnimationEnd: _isAnimationEnd,
-                            onPressed: () {}),
-                        SidebarButton(
-                            isSelected: false,
-                            icon: Icons.schedule,
-                            label: "Tasks",
-                            isAnimationEnd: _isAnimationEnd,
-                            onPressed: () {}),
-                        SidebarButton(
-                            isSelected: false,
-                            icon: Icons.newspaper,
-                            label: "News",
-                            isAnimationEnd: _isAnimationEnd,
-                            onPressed: () {}),
-                        SidebarButton(
-                            isSelected: false,
-                            icon: Icons.support,
-                            label: "Support",
-                            isAnimationEnd: _isAnimationEnd,
-                            onPressed: () {}),
-                        SidebarButton(
-                            isSelected: false,
-                            icon: Icons.info,
-                            label: "About",
-                            isAnimationEnd: _isAnimationEnd,
-                            onPressed: () {}),
-                      ],
-                    ),
+                            onPressed: () {
+                              setState(() {
+                                _index = index;
+                              });
+                            },
+                          );
+                        },
+                        separatorBuilder: (context, index) => const SizedBox(
+                              height: 10,
+                            ),
+                        itemCount: sidebarItems.length),
                   ),
                   const Spacer(),
                   SidebarButton(

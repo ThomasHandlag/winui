@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class RoundClock extends StatefulWidget {
+  const RoundClock({super.key});
+
   @override
   State<StatefulWidget> createState() => RoundClockState();
 }

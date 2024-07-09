@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:winui/components/round_clock.dart';
-import 'dart:developer' as dev;
 
 class Lamb extends StatefulWidget {
   const Lamb({super.key});
@@ -37,7 +35,7 @@ class LambState extends State<Lamb> {
                     width: 150,
                     height: 150,
                   )),
-              RoundClock(),
+              const RoundClock(),
             ],
           )
         ],
