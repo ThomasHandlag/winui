@@ -13,7 +13,8 @@ class StatusBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: const BoxConstraints(maxWidth: 250),
+        width: MediaQuery.of(context).size.width * 0.2,
+
         child: Material(
           color: Colors.transparent,
           child: Container(

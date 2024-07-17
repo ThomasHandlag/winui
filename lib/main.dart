@@ -1,10 +1,13 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:winui/components/circle_audio_visualizer.dart';
 import 'package:winui/components/github_status.dart';
 import 'package:winui/components/lamb.dart';
 import 'package:winui/components/sidebar.dart';
 import 'package:winui/components/status_box.dart';
 import 'package:winui/components/user_box.dart';
 import 'package:winui/theme.dart';
+import 'dart:developer' as dev;
 
 void main() {
   runApp(const MyApp());
@@ -35,8 +38,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final int _pageIndex = 0;
+
+  bool _isPlay = false;
+
+  int _noise = 0;
+
+  final player = AudioPlayer();
+
+  void getAudioInfo() async {
+    if (_isPlay) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
       fit: StackFit.expand,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -88,17 +98,37 @@ class _MyHomePageState extends State<MyHomePage> {
                                 label: "Hour of work",
                                 value: "102",
                                 iconData: Icons.hourglass_full),
-                            UserBox(
-                                name: "Ọp ti mớt pờ rai",
-                                avatarPath:
-                                    "https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/3dd0fb8b5f71a701086c8ec4065836f2.jpeg?lk3s=a5d48078&nonce=3544&refresh_token=d76a35bedb747fc761cc3d9aaf15dd36&x-expires=1719900000&x-signature=RUfS1VM%2FJ10E6B%2BaNmcW4f4ltTg%3D&shp=a5d48078&shcp=81f88b70")
+                            UserBox(name: "Ọp ti mớt pờ rai", avatarPath: "0")
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Container(
-                                width: 600,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: 300,
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  backgroundBlendMode: BlendMode.softLight,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "180921 commit in the last year",
+                                    ),
+                                    GitHubStatus(),
+                                  ]),
+                            ),
+                            const Lamb(),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 height: 300,
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
@@ -111,10 +141,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                     children: [
                                       Text(
                                         "Daily Report",
-                                      )
+                                      ),
+                                      Expanded(
+                                          child: CircleAudioVisualizer(
+                                              angleStep: 360 / 120,
+                                              numBar: 120,
+                                              barWidth: 10,
+                                              barHeight: 10)),
                                     ])),
                             Container(
-                              width: 600,
+                              width: MediaQuery.of(context).size.width * 0.4,
                               height: 300,
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
@@ -131,35 +167,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             )
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              width: 600,
-                              height: 300,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  backgroundBlendMode: BlendMode.softLight,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "180921 line of code in the last year",
-                                    ),
-                                     GitHubStatus(),
-                                  ]),
-                            ),
-                            const Lamb(),
-                          ],
-                        )
                       ],
                     )))
           ],
-        )
+        ),
       ],
-    ) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+    ));
   }
 }

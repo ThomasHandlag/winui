@@ -11,11 +11,10 @@ class Lamb extends StatefulWidget {
 }
 
 class LambState extends State<Lamb> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 600,
+      width: MediaQuery.of(context).size.width * 0.4,
       height: 300,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -68,8 +67,12 @@ class LambPanter extends CustomPainter {
     var a = center.dx + radius;
     var paint = Paint();
     paint.color = color;
-    canvas.drawOval(
-        Rect.fromCenter(center: center, width: a, height: a), paint);
+    var rect = Rect.fromCenter(center: center, width: a, height: a);
+    canvas.drawOval(rect, paint);
+    var path = Path();
+    var shadowRect = Rect.fromCenter(center: center, width: a+5, height: a+5);
+    path.addOval(shadowRect);
+    canvas.drawShadow(path, color, 5, true);
     paint.color = Colors.pink.shade300;
     canvas.drawOval(
         Rect.fromCenter(center: center, width: 5, height: 5), paint);
@@ -83,7 +86,7 @@ class LambPanter extends CustomPainter {
 
     double hourHandX = center.dx + radius * 0.85 * cos(hourRadians - pi / 2);
     double hourHandY = center.dy + radius * 0.85 * sin(hourRadians - pi / 2);
-    
+
     paint.strokeWidth = 2;
     paint.color = Colors.pink;
     canvas.drawLine(
@@ -97,13 +100,15 @@ class LambPanter extends CustomPainter {
     double minuteHandX = center.dx + radius * 0.7 * cos(minuteRadians - pi / 2);
     double minuteHandY = center.dy + radius * 0.7 * sin(minuteRadians - pi / 2);
     paint.strokeWidth = 2;
-    canvas.drawLine(Offset(center.dx, center.dy), Offset(minuteHandX, minuteHandY), paint);
+    canvas.drawLine(
+        Offset(center.dx, center.dy), Offset(minuteHandX, minuteHandY), paint);
 
     double secondRadians = (second * 6) * pi / 180;
     double secondHandX = center.dx + radius * 0.8 * cos(secondRadians - pi / 2);
     double secondHandY = center.dy + radius * 0.8 * sin(secondRadians - pi / 2);
     paint.strokeWidth = 1;
-    canvas.drawLine(Offset(center.dx, center.dy), Offset(secondHandX, secondHandY), paint);
+    canvas.drawLine(
+        Offset(center.dx, center.dy), Offset(secondHandX, secondHandY), paint);
 
     double hourRadius = radius - 10;
     TextPainter textPainter = TextPainter(

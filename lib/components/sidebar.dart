@@ -50,6 +50,9 @@ class SidebarState extends State<Sidebar> {
         width: _isExpande ? widget.maxWidth : 80,
         height: MediaQuery.of(context).size.height,
         duration: animationDuration,
+        curve: Curves.fastOutSlowIn,
+        alignment: Alignment.topLeft,
+        transformAlignment: Alignment.topLeft,
         child: Material(
             elevation: 10,
             color: Colors.transparent,

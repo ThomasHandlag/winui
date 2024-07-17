@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:winui/components/layouts/github_stat_layout.dart';
 
@@ -22,16 +24,21 @@ class GitHubStatusState extends State<GitHubStatus> {
           color: Colors.grey.shade900,
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(
+            Expanded(
                 child: Column(children: [
               Expanded(child: GitHubStatusLayout(data: [1, 2, 3])),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Text("Learn more about Github API"),
+                    child: Text("Learn more about Github API",
+                        style: TextStyle(
+                          fontSize: max(
+                              1, MediaQuery.of(context).size.width / 300 * 2),
+                        )),
                   ),
                   StatusInfo(
                     data: [],
@@ -50,18 +57,28 @@ class GitHubStatusState extends State<GitHubStatus> {
 }
 
 class StateBox extends StatelessWidget {
-  const StateBox({super.key});
+  StateBox({super.key});
+
+  final listColors = const [
+    Color.fromARGB(255, 80, 0, 135),
+    Color.fromARGB(255, 105, 0, 160),
+    Color.fromARGB(255, 130, 0, 185),
+    Color.fromARGB(255, 155, 0, 205),
+    Color.fromARGB(255, 200, 0, 255),
+  ];
+
+  final random = Random();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(1),
         child: Container(
-            width: 12,
-            height: 12,
+            width: MediaQuery.of(context).size.width * 0.008,
+            height: MediaQuery.of(context).size.width * 0.008,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
-              color: Colors.purple.shade300,
+              color: listColors[random.nextInt(listColors.length)],
             ),
             child: GestureDetector(
               onTap: () {},
@@ -86,9 +103,9 @@ class YearSelectListState extends State<YearSelectList> {
   @override
   Widget build(context) {
     return Container(
-        height: 200,
+        height: MediaQuery.of(context).size.height * 0.2,
         color: Colors.transparent,
-        width: 100,
+        width: MediaQuery.of(context).size.width * 0.05,
         child: ListView.separated(
           separatorBuilder: (context, index) => const SizedBox(height: 10),
           itemBuilder: (context, index) {
@@ -141,13 +158,15 @@ class StatusInfo extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return const Text("Less", style: TextStyle(color: Colors.grey, fontSize: 12));
+                return const Text("Less",
+                    style: TextStyle(color: Colors.grey, fontSize: 12));
               } else if (index == listColors.length - 1) {
-                return const Text("More", style: TextStyle(color: Colors.grey, fontSize: 12));
+                return const Text("More",
+                    style: TextStyle(color: Colors.grey, fontSize: 12));
               } else {
                 return Container(
-                  width: 15,
-                  height: 15,
+                  width: MediaQuery.of(context).size.width * 0.01,
+                  height: MediaQuery.of(context).size.width * 0.01,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: listColors[index],

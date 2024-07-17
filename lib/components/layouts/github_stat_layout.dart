@@ -21,7 +21,7 @@ class GitHubStatusLayout extends StatelessWidget {
         for (int i = 0; i < dayDiff.inDays; i++)
           LayoutId(
             id: i,
-            child: const StateBox(),
+            child: StateBox(),
           ),
       ],
     );
@@ -64,5 +64,5 @@ class GithubLayoutDelegate extends MultiChildLayoutDelegate {
 
   // automatically cause a relayout, like any other widget.
   @override
-  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) => true;
+  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) => false;
 }

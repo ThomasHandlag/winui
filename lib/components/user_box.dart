@@ -38,7 +38,7 @@ class UserBox extends StatelessWidget {
                   color: Colors.green, borderRadius: BorderRadius.circular(50)),
               child: ClipOval(
                 // child: Image.network(avatarPath,),
-                child: Image.asset("assets/images/bg2.jpg", fit: BoxFit.fill,)
+                child: Image.asset("assets/images/bg2.jpg", fit: BoxFit.fill,cacheWidth: 40, cacheHeight: 40),
               ),
             ),
           ],

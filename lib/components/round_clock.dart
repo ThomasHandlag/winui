@@ -28,7 +28,7 @@ class RoundClockState extends State<RoundClock> {
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.grey.shade600),
+            color: Colors.grey.shade900),
         padding: const EdgeInsets.all(5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,9 +39,9 @@ class RoundClockState extends State<RoundClock> {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(5),
                       bottomLeft: Radius.circular(5)),
-                  color: Colors.purple.shade300),
+                  color: Colors.purple.shade900),
               child: Text(
-                "${_date.hour}",
+                "${_date.hour > 9 ? "" : "0"}${_date.hour}",
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -50,22 +50,22 @@ class RoundClockState extends State<RoundClock> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             Container(
               padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration:  BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(5),
                       bottomRight: Radius.circular(5)),
-                  color: Colors.grey),
+                  color: Colors.grey.shade600),
               child: Text("${_date.minute > 9 ? "" : "0"}${_date.minute}",
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             Container(
                 padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(5),
                         bottomRight: Radius.circular(5)),
-                    color: Colors.grey),
+                    color: Colors.grey.shade600),
                 child: Text("${_date.second > 9 ? "" : "0"}${_date.second}",
                     style: const TextStyle(fontSize: 12)))
           ],
