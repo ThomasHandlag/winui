@@ -4,6 +4,14 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+#include <flutter/event_channel.h>
+#include <flutter/event_sink.h>
+#include <flutter/event_stream_handler_functions.h>
+#include <flutter/method_channel.h>
+#include <flutter/standard_method_codec.h>
+#include <windows.h>
+#include <memory>
+
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
     : project_(project) {}
 
@@ -25,6 +33,17 @@ bool FlutterWindow::OnCreate() {
     return false;
   }
   RegisterPlugins(flutter_controller_->engine());
+
+
+  flutter::MethodChannel<> channel(
+      flutter_controller_->engine()->messenger(), "com.thugbn.winui/audiobuffer",
+      &flutter::StandardMethodCodec::GetInstance());
+  channel.SetMethodCallHandler(
+      [](const flutter::MethodCall<>& call,
+          std::unique_ptr<flutter::MethodResult<>> result) {
+             
+      });
+
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
 
   flutter_controller_->engine()->SetNextFrameCallback([&]() {
